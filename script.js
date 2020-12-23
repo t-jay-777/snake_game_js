@@ -35,14 +35,14 @@ function createBoard() {
     }
 }
 
-//The startGame function first gets all the divs (since we are creating the 
+//The startGame function first gets all the divs (since we are creating the
 //divs at runtime, we can not get them at the top of the code).
 function startGame() {
     let squares = document.querySelectorAll(".grid div");
     //select a spot for our apple
     randomApple(squares);
     //random apple
-    //The direction refers to where the 
+    //The direction refers to where the
     //snake is headed – 1 for right, -1 for left, and so on
     direction = 1;
     scoreDisplay.innerHTML = score;
@@ -56,3 +56,18 @@ function startGame() {
     //This is so that we can easily call clearInterval on that variable.
     interval = setInterval(moveOutcome, intervalTime);
 }
+
+function moveOutcome() {
+    //we first get all the grid divs
+    let squares = document.querySelectorAll(".grid div");
+    //we check if the checkForHits function returns true
+    if (checkForHits(squares)) {
+        alert("you hit something");
+        popup.style.display = "flex";
+        return clearInterval(interval);
+    } else {
+        moveSnake(squares);
+    }
+}
+
+
