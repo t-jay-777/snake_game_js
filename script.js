@@ -70,4 +70,43 @@ function moveOutcome() {
     }
 }
 
+//The moveSnake function receives an argument called squares 
+//so that we don't have to get the .grid div again in this function
+function moveSnake(squares) {
+    //The first thing we need to do is remove the last element 
+    //of the currentSnake array via pop
+    //(this is the tail and the first element is always the head)
+    let tail = currentSnake.pop()
+    squares[tail].classList.remove("snake")
+    currentSnake.unshift(currentSnake[0] + direction)
+    // movement ends here  
+    eatApple(squares, tail)
+    squares[currentSnake[0]].classList.add("snake")
+} 
+/*Let's assume that our snake just started moving and is facing to 
+the right (that is, direction = 1). That direction will be added to 
+the currentSnake's head and the sum will be pushed as the new snakeHead.
+
+For example, if the snake was in position [2,1,0], we remove the last 
+element leaving it at position [2,1]. Then we take the head which is 2 
+and add the direction which is 1 and make this value the new value [3,2,1] 
+which moves our snake a step forward to the right after one second.
+*/
+
+// Depending on the condition defined, it could either return 
+//true (meaning we hit something) or false
+function checkForHits(squares) {
+    if (
+        //currentSnake [0] the head of the snake
+        (currentSnake[0] + width >= (width * width) && direction === width) ||
+        (currentSnake[0] % width === width - 1 && direction === 1) ||
+        (currentSnake[0] % width === 0 && direction === -1) ||
+        (currentSnake[0] - width <= 0 && direction === -width) ||
+        squares[currentSnake[0] + direction].classList.contains("snake")
+    ) {
+        return true
+    } else {
+        return false
+    }
+}
 
