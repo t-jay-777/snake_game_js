@@ -143,7 +143,12 @@ function randomApple(squares) {
     squares[appleIndex].classList.add("apple")
 }
 
+//event listener line 22
 function control(e) {
+    // Now each button on the keyboard has a value 
+    // called keycode (numbers) which we have access to and let us know 
+    // which number was clicked. Basically we will be watching for the 
+    // arrow keys with their respective keycodes
     if (e.keycode === 39) {
         direction = 1 // right 
     } else if (e.keycode === 38) {
@@ -153,4 +158,12 @@ function control(e) {
     } else if (e.keycode === 40) {
         direction = +width // down the snake head will instantly appear 10 divs below from the current div 
     }
-} 
+}
+
+//the replay div which will popup when the snake hits something
+function replay() {
+    grid.innerHTML = ""
+    createBoard()
+    startGame()
+    popup.style.display = "none";
+}  
