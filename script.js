@@ -132,3 +132,25 @@ function eatApple(squares, tail) {
     }
 }
 
+// randomApple simply picks a spot to place our 
+// apple by using a do while loop. First it picks a random 
+// position with Math.random() in the do loop and checks if the spot 
+// it picked already contains a snake class.
+function randomApple(squares) {
+    do {
+        appleIndex = Math.floor(Math.random() * squares.length)
+    } while (squares[appleIndex].classList.contains("snake"))
+    squares[appleIndex].classList.add("apple")
+}
+
+function control(e) {
+    if (e.keycode === 39) {
+        direction = 1 // right 
+    } else if (e.keycode === 38) {
+        direction = -width //if we press the up arrow, the snake will go ten divs up
+    } else if (e.keycode === 37) {
+        direction = -1 // left, the snake will go left one div
+    } else if (e.keycode === 40) {
+        direction = +width // down the snake head will instantly appear 10 divs below from the current div 
+    }
+} 
